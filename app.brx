@@ -1,4 +1,7 @@
 #!/usr/bin/brux
+
+donut("src/utils.nut")
+
 donut("src/assets.nut")
 donut("src/globals.nut")
 donut("src/input.nut")
@@ -17,7 +20,7 @@ while (true) {
 	if (getQuit()) {
 		break
 	}
-	::apMain()
-	::handleInput()
+	apMain()
+	handleInput()
 	update()
 }

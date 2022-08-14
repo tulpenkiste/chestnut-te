@@ -7,6 +7,9 @@
 				curPos -= 1
 			}
 		}
+		else if (keyPress(k_lalt)) {
+			determineTheme()
+		}
 		else if (check == k_enter) {
 			files[curFile][2] += "\n"
 			curPos += 1
