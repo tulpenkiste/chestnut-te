@@ -4,8 +4,9 @@
 ::curPos <- 0
 
 ::curFile <- ""
+// Files are name = [extension, path, content]
 ::files <- {
-	test = ["nut", ""]
+	test = ["nut", ".", ""]
 }
 
 ::changeCurFile <- function(file) {
