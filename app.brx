@@ -7,10 +7,11 @@ donut("src/render.nut")
 setScalingFilter(2)
 setResolution(800, 600)
 setFPS(60)
-setWindowTitle("Chestnut TE")
 
 screenRectSize = [screenW(), screenH()]
 apScreen = newTexture(screenRectSize[0], screenRectSize[1])
+
+changeCurFile("test")
 
 while (true) {
 	if (getQuit()) {
