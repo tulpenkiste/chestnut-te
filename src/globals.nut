@@ -1,5 +1,5 @@
-::screenRectSize <- [screenW(), screenH()]
-::apScreen <- newTexture(screenRectSize[0], screenRectSize[1])
+::screenRectSize <- []
+::apScreen <- 0
 
 ::curPos <- 0
 
