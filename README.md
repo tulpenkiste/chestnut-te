@@ -1,2 +1,2 @@
 # chestnut-te
-Chestnut Text Editor Main Repository
+Basic text editor made using the [Brux](https://github.com/KelvinShadewing/brux-gdk) game engine.
