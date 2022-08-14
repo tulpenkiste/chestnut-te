@@ -24,7 +24,9 @@
 	setDrawTarget(apScreen)
 	setDrawColor(currentTheme.bgCol)
 	drawRec(0, 0, screenRectSize[0], screenRectSize[1], true)
-	drawText(currentTheme.font, 0, 0, "THEME: " + currentTheme.themeName + "\nCPOS: " + curPos.tostring() + "\nPATH: " + files[curFile][1] + "\n" + files[curFile][2])
+	local output = files[curFile][2]
+	if (debug) output = "THEME: " + currentTheme.themeName + "\nCPOS: " + curPos.tostring() + "\nPATH: " + files[curFile][1] + "\nFPS: " + getFPS() + "\n" + output
+	drawText(currentTheme.font, 0, 0, output)
 	resetDrawTarget()
 	drawImage(apScreen, 0, 0)
 }
@@ -34,7 +36,7 @@ local themeList = lsdir("themes")
 for (local i = 0; i < themeList.len(); i++) {
 	if (themeList[i] != "." && themeList[i] != ".." && themeList[i].find(".json") != null) {
 		local themeFile = mergeTable({}, jsonRead(fileRead("themes/" + themeList[i])))
-		themes.append(Theme(themeFile.themeName, themeFile.bgCol.tointeger(), themeFile.textCol.tointeger(), themeFile.fontPath))
+		themes.insert(0, Theme(themeFile.themeName, themeFile.bgCol.tointeger(), themeFile.textCol.tointeger(), themeFile.fontPath))
 		print("Registered theme " + themeFile.themeName + ".")
 	}
 }

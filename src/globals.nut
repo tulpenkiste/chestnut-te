@@ -1,3 +1,5 @@
+::debug <- false
+
 ::screenRectSize <- []
 ::apScreen <- 0
 
