@@ -1,0 +1,19 @@
+#!/usr/bin/brux
+donut("src/assets.nut")
+donut("src/globals.nut")
+donut("src/input.nut")
+donut("src/render.nut")
+
+setScalingFilter(2)
+setResolution(800, 600)
+setFPS(60)
+setWindowTitle("Chestnut TE")
+
+while (true) {
+	if (getQuit()) {
+		break
+	}
+	::apMain()
+	::handleInput()
+	update()
+}
