@@ -16,10 +16,7 @@ apScreen = newTexture(screenRectSize[0], screenRectSize[1])
 
 changeCurFile("test")
 
-while (true) {
-	if (getQuit()) {
-		break
-	}
+while (!getQuit() && !apQuit) {
 	apMain()
 	handleInput()
 	update()

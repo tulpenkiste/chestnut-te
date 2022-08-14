@@ -10,6 +10,9 @@
 		else if (keyPress(k_f1)) {
 			determineTheme()
 		}
+		else if (keyPress(k_f4)) {
+			apQuit = true
+		}
 		else if (keyPress(k_f12)) {
 			debug = !debug
 		}
