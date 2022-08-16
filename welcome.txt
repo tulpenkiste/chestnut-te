@@ -1,4 +1,8 @@
 Welcome to Chestnut TE. To begin typing, press T to enter INSERT mode. Exit a mode by pressing ESC.
 Mode List:
 T - Insert
-S - IO (Save/Load)
+S - CMD
+CMD List:
+s - Save
+l - Load
+swp - Swap to loaded file

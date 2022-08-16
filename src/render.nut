@@ -25,6 +25,8 @@
 	setDrawColor(currentTheme.bgCol)
 	drawRec(0, 0, screenRectSize[0], screenRectSize[1], true)
 	local output = files[curFile][3]
+	if (inputMode != "CMD") output = "MODE: " + inputMode + "\n" + output
+	else output = "CMD:" +  + "\n" + output
 	if (debug) output = "THEME: " + currentTheme.themeName + "\nSCALE: " + apScale + "\nCPOS: " + curPos.tostring() + "\nPATH: " + files[curFile][1] + "\nFPS: " + getFPS() + "\n" + output
 	drawText(currentTheme.font, 0, 0, output)
 	resetDrawTarget()

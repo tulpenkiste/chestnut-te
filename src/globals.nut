@@ -12,7 +12,9 @@
 ::files <- {
 }
 
+// Mode can be either NONE, INSERT, CMD
 ::inputMode <- "NONE"
+::cmdInput <- ""
 
 ::changeCurFile <- function(file) {
 	if (files.keys().find(file) != null) {
@@ -45,4 +47,7 @@
 		files[file] <- [fileWithoutExtension, null, path.slice(0, path.find(file)), content]
 		changeCurFile(file)
 	}
+}
+
+::saveFile <- function() {
 }

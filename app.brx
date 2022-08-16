@@ -16,7 +16,7 @@ screenRectSize = [screenW(), screenH(), apScale]
 apScreen = newTexture(screenRectSize[0], screenRectSize[1])
 
 if (!fileExists(".nowelcome")) {
-	openFile("./.gitignore")
+	openFile("./welcome.txt")
 }
 
 while (!getQuit() && !apQuit) {
