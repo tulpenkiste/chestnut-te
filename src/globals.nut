@@ -27,6 +27,13 @@
 			print(cmdInput[1])
 			openFile(cmdInput[1])
 			break
+		case "c":
+			delete files[curFile]
+			if (files.keys().len() == 0) {
+				print("No more files open. Closing due to a lack of newfile support.")
+				apQuit = true
+			}
+			break
 		case "q":
 		case "ex":
 			apQuit = true
