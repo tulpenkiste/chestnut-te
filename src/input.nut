@@ -52,6 +52,9 @@
 				else if (keyPress(k_f12)) {
 					if (apScale < 4.9) apScale += 0.25
 				}
+				else if (check == k_ralt) {
+					qSwapCurFile()
+				}
 				else if (check == k_enter) {
 					files[curFile][3] += "\n"
 					curPos += 1

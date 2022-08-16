@@ -24,7 +24,6 @@
 			break
 		case "l":
 			if (cmdInput[1].find("/") == null) cmdInput[1] = "./" + cmdInput[1]
-			print(cmdInput[1])
 			openFile(cmdInput[1])
 			break
 		case "c":
@@ -61,6 +60,14 @@
 	else {
 		print("Couldn't find " + file + "!")
 	}
+}
+
+::qSwapCurFile <- function() {
+	local cIndex = files.keys().find(curFile) + 1
+	if (cIndex > files.keys().len()-1) cIndex = 0
+	curFile = files.keys()[cIndex]
+	setWindowTitle("Chestnut TE - " + file.tostring())
+	curPos = files[curFile][3].len()-1
 }
 
 ::openFile <- function(path) {
