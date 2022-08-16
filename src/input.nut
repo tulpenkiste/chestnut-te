@@ -2,7 +2,34 @@
 	local check = anyKeyPress()
 	if (check != -1) {
 		switch (inputMode) {
-			case "INSERT":
+			case "CMD": {
+				if (check == k_escape) {
+					inputMode = "NONE"
+					cmdInput = ""
+					return
+				}
+				else if (check == k_backspace) {
+					if (cmdInput.len() != 0) cmdInput = cmdInput.slice(0, cmdInput.len()-1)
+				}
+				if (check == k_enter) {
+					cmdInput = strip(cmdInput)
+					if (cmdInput == "") return
+					if (cmdInput.find(" ")) {
+						cmdInput = split(cmdInput, " ")
+					}
+					else {
+						cmdInput = [cmdInput]
+					}
+					cmdInput[0] = cmdInput[0].tolower()
+					runCMD()
+				}
+				local charCheck = keyString()
+				if (charCheck != "") {
+					cmdInput += charCheck
+				}
+				break
+			}
+			case "INSERT": {
 				if (check == k_escape) {
 					inputMode = "NONE"
 					return
@@ -47,10 +74,17 @@
 					curPos += 1
 					charCheck = keyString()
 				}
-			default:
+				break
+			}
+			case "NONE": {
 				if (check == k_t) {
 					inputMode = "INSERT"
 				}
+				else if (check == k_s) {
+					inputMode = "CMD"
+				}
+				break
+			}
 		}
 	}
 }

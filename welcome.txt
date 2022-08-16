@@ -5,4 +5,6 @@ S - CMD
 CMD List:
 s - Save
 l - Load
+q/ex - Exit
+rl - Reload text file contents
 swp - Swap to loaded file
