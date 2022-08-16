@@ -1,5 +1,7 @@
 #!/usr/bin/brux
 
+print("Using BRUX " + bruxVersion())
+
 donut("src/utils.nut")
 
 donut("src/assets.nut")
@@ -7,17 +9,24 @@ donut("src/globals.nut")
 donut("src/input.nut")
 donut("src/render.nut")
 
-setScalingFilter(1)
 setResolution(800, 600)
 setFPS(60)
 
-screenRectSize = [screenW(), screenH()]
+screenRectSize = [screenW(), screenH(), apScale]
 apScreen = newTexture(screenRectSize[0], screenRectSize[1])
 
-changeCurFile("test")
+if (!fileExists(".nowelcome")) {
+	openFile("./.gitignore")
+}
 
 while (!getQuit() && !apQuit) {
 	apMain()
 	handleInput()
+	setScaling(apScale)
+	if (screenRectSize[0] != windowW() || screenRectSize[1] != windowH() || apScale != screenRectSize[2]) {
+		setResolution(windowW(), windowH())
+		screenRectSize = [windowW(), windowH(), apScale]
+		apScreen = newTexture(screenRectSize[0] / apScale, screenRectSize[1] / apScale)
+	}
 	update()
 }

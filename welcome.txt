@@ -1,0 +1,4 @@
+Welcome to Chestnut TE. To begin typing, press T to enter INSERT mode. Exit a mode by pressing ESC.
+Mode List:
+T - Insert
+S - IO (Save/Load)

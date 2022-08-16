@@ -24,8 +24,8 @@
 	setDrawTarget(apScreen)
 	setDrawColor(currentTheme.bgCol)
 	drawRec(0, 0, screenRectSize[0], screenRectSize[1], true)
-	local output = files[curFile][2]
-	if (debug) output = "THEME: " + currentTheme.themeName + "\nCPOS: " + curPos.tostring() + "\nPATH: " + files[curFile][1] + "\nFPS: " + getFPS() + "\n" + output
+	local output = files[curFile][3]
+	if (debug) output = "THEME: " + currentTheme.themeName + "\nSCALE: " + apScale + "\nCPOS: " + curPos.tostring() + "\nPATH: " + files[curFile][1] + "\nFPS: " + getFPS() + "\n" + output
 	drawText(currentTheme.font, 0, 0, output)
 	resetDrawTarget()
 	drawImage(apScreen, 0, 0)
