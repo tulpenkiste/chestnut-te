@@ -1,4 +1,5 @@
 ::handleInput <- function() {
+	// Determine mode
 	switch (inputMode) {
 		case "CMD": {
 			if (keyPress(k_escape)) {

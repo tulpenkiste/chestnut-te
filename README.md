@@ -6,3 +6,4 @@ Basic modal text editor made using the [Brux](https://github.com/KelvinShadewing
 - [ ] Fix eaten inputs for good
 - [ ] Prevent input on mode swap
 - [ ] Implement Cursor Pos to make editing files easier
+- [ ] Config file

@@ -1,10 +1,11 @@
+// Application variables
 ::debug <- false
 ::apQuit <- false
 ::apScale <- 2.0
-
-::screenRectSize <- []
 ::apScreen <- 0
+::screenRectSize <- []
 
+// Cursor position
 ::curPos <- 0
 
 ::curFile <- ""
@@ -17,16 +18,20 @@
 ::cmdInput <- ""
 
 ::runCMD <- function() {
+	// Determine command type
 	switch (cmdInput[0]) {
 		case "s":
+			// Save file
 			saveFile()
 			inputMode = "NONE"
 			break
 		case "l":
+			// Load file
 			if (cmdInput[1].find("/") == null) cmdInput[1] = "./" + cmdInput[1]
 			openFile(cmdInput[1])
 			break
 		case "c":
+			// Close file
 			delete files[curFile]
 			if (files.keys().len() == 0) {
 				print("No more files open. Closing due to a lack of newfile support.")
@@ -35,12 +40,15 @@
 			break
 		case "q":
 		case "ex":
+			// Exit app
 			apQuit = true
 			break
 		case "swp":
+			// Swap to specific file. Hotkey: Right Alt Key
 			changeCurFile(cmdInput[1])
 			break
 		case "rl":
+			// Reload file
 			files[curFile][3] = fileRead(files[curFile][2] + curFile)
 			break
 		default:
@@ -51,6 +59,7 @@
 }
 
 ::changeCurFile <- function(file) {
+	// Change which file in files is the active file
 	if (files.keys().find(file) != null) {
 		curFile = file
 		if (file == "new") setWindowTitle("Chestnut TE - Untitled")
@@ -63,6 +72,7 @@
 }
 
 ::qSwapCurFile <- function() {
+	// Same thing as above but for hotkey
 	local cIndex = files.keys().find(curFile) + 1
 	if (cIndex > files.keys().len()-1) cIndex = 0
 	curFile = files.keys()[cIndex]
@@ -71,6 +81,7 @@
 }
 
 ::openFile <- function(path) {
+	// Opens and reads a text file on the system
 	if (!fileExists(path)) return
 	local pathAsArr = split(path, "/")
 	if (path.find("/") == null) {
@@ -96,6 +107,7 @@
 }
 
 ::saveFile <- function() {
+	// Save contents to file
 	local pathToSave = files[curFile][2] + curFile
 	fileWrite(pathToSave, files[curFile][3])
 }

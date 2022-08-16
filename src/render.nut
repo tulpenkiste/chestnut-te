@@ -1,3 +1,4 @@
+// Themes for customising the look of chestnut-te
 ::Theme <- class {
 	constructor(tName, tBgCol, tTextCol, fontPath) {
 		themeName = tName
@@ -14,12 +15,14 @@
 	font = null
 }
 
+// Swap between themes
 ::determineTheme <- function() {
 	currentThemeIndex += 1
 	if (currentThemeIndex > themes.len()-1) currentThemeIndex = 0
 	currentTheme = themes[currentThemeIndex]
 }
 
+// Main function for rendering
 ::apMain <- function() {
 	setDrawTarget(apScreen)
 	setDrawColor(currentTheme.bgCol)
@@ -42,6 +45,7 @@
 }
 
 ::themes <- []
+// Register themes
 local themeList = lsdir("themes")
 for (local i = 0; i < themeList.len(); i++) {
 	if (themeList[i] != "." && themeList[i] != ".." && themeList[i].find(".json") != null) {
@@ -51,5 +55,6 @@ for (local i = 0; i < themeList.len(); i++) {
 	}
 }
 
+// Make program aware of current theme
 ::currentThemeIndex <- 0
 ::currentTheme <- themes[currentThemeIndex]
