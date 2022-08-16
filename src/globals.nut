@@ -76,7 +76,7 @@
 	local cIndex = files.keys().find(curFile) + 1
 	if (cIndex > files.keys().len()-1) cIndex = 0
 	curFile = files.keys()[cIndex]
-	setWindowTitle("Chestnut TE - " + file.tostring())
+	setWindowTitle("Chestnut TE - " + files.keys()[cIndex])
 	curPos = files[curFile][3].len()-1
 }
 
