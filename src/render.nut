@@ -38,7 +38,7 @@
 		}
 		output += "\n" + iniOut
 	}
-	if (debug) output = "THEME: " + currentTheme.themeName + "\nSCALE: " + apScale + "\nCPOS: " + curPos.tostring() + "\nPATH: " + files[curFile][1] + "\nFPS: " + getFPS() + "\n" + output
+	if (debug) output = "THEME: " + currentTheme.themeName + "\nSCALE: " + apScale + "\nCPOS: " + curPos.tostring() + "\nPATH: " + files.keys()[files.keys().find(curFile)] + "\nFPS: " + getFPS() + "\n" + output
 	drawText(currentTheme.font, 0, 0, output)
 	resetDrawTarget()
 	drawImage(apScreen, 0, 0)

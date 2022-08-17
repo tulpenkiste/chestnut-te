@@ -8,6 +8,9 @@ Basic modal text editor made using the [Brux](https://github.com/KelvinShadewing
 - [ ] Implement Cursor Pos to make editing files easier
 - [ ] Config file
 ### Changelog
+* **0.1.1**
+  * Added fullscreen toggle using F10
+  * Fixed debug showing extension rather than the path
 * **0.1**
   * Basic editor functionality
   * Several commands built in
