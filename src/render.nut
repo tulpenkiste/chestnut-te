@@ -1,11 +1,12 @@
 // Themes for customising the look of chestnut-te
 ::Theme <- class {
-	constructor(tName, tBgCol, tTextCol, fontPath) {
+	constructor(tName, tBgCol, tTextCol, fontPath, cursorPath) {
 		themeName = tName
 		bgCol = tBgCol
 		textCol = tTextCol
 		sprFont = newSprite(fontPath, 6, 8, 0, 0, 0, 0)
 		font = newFont(sprFont, 0, 0, true, 0)
+		sprCursor = newSprite(cursorPath, 10, 13, 0, 0, 0, 0)
 	}
 
 	themeName = null
@@ -13,6 +14,7 @@
 	textCol = null
 	sprFont = null
 	font = null
+	sprCursor = null
 }
 
 // Swap between themes
@@ -40,6 +42,7 @@
 	}
 	if (debug) output = "THEME: " + currentTheme.themeName + "\nSCALE: " + apScale + "\nCPOS: " + curPos.tostring() + "\nPATH: " + files.keys()[files.keys().find(curFile)] + "\nFPS: " + getFPS() + "\n" + output
 	drawText(currentTheme.font, 0, 0, output)
+	updateCursor()
 	resetDrawTarget()
 	drawImage(apScreen, 0, 0)
 }
@@ -50,7 +53,7 @@ local themeList = lsdir("themes")
 for (local i = 0; i < themeList.len(); i++) {
 	if (themeList[i] != "." && themeList[i] != ".." && themeList[i].find(".json") != null) {
 		local themeFile = mergeTable({}, jsonRead(fileRead("themes/" + themeList[i])))
-		themes.insert(0, Theme(themeFile.themeName, themeFile.bgCol.tointeger(16), themeFile.textCol.tointeger(16), themeFile.fontPath))
+		themes.insert(0, Theme(themeFile.themeName, themeFile.bgCol.tointeger(16), themeFile.textCol.tointeger(16), themeFile.fontPath, themeFile.cursorPath))
 		print("Registered theme " + themeFile.themeName + ".")
 	}
 }

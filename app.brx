@@ -6,6 +6,7 @@ print("Using BRUX " + bruxVersion())
 donut("src/utils.nut")
 
 donut("src/assets.nut")
+donut("src/cursor.nut")
 donut("src/globals.nut")
 donut("src/input.nut")
 donut("src/render.nut")
