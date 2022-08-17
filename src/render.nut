@@ -50,7 +50,7 @@ local themeList = lsdir("themes")
 for (local i = 0; i < themeList.len(); i++) {
 	if (themeList[i] != "." && themeList[i] != ".." && themeList[i].find(".json") != null) {
 		local themeFile = mergeTable({}, jsonRead(fileRead("themes/" + themeList[i])))
-		themes.insert(0, Theme(themeFile.themeName, themeFile.bgCol.tointeger(), themeFile.textCol.tointeger(), themeFile.fontPath))
+		themes.insert(0, Theme(themeFile.themeName, themeFile.bgCol.tointeger(16), themeFile.textCol.tointeger(16), themeFile.fontPath))
 		print("Registered theme " + themeFile.themeName + ".")
 	}
 }

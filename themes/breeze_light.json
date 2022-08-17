@@ -1,6 +1,6 @@
 {
 	"themeName": "Breeze Light",
-	"bgCol": "4042322175",
-	"textCol": "4294967295",
+	"bgCol": "0xF0F0F0FF",
+	"textCol": "0xFFFFFFFF",
 	"fontPath": "res/font.png"
 }
