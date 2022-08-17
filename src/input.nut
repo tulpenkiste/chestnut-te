@@ -43,6 +43,10 @@
 				files[curFile][3] += "\n"
 				curPos += 1
 			}
+			else if (keyPress(k_tab)) {
+				files[curFile][3] += "\t"
+				curPos += 1
+			}
 			else if (keyPress(k_left)) {
 				curPos -= 1
 				if (curPos < 0) curPos = 0
