@@ -19,6 +19,9 @@ apScreen = newTexture(screenRectSize[0], screenRectSize[1])
 if (!fileExists(".nowelcome")) {
 	openFile("./welcome.txt")
 }
+else {
+	newFile()
+}
 
 while (!getQuit() && !apQuit) {
 	apMain()

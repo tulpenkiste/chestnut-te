@@ -25,6 +25,10 @@
 			saveFile()
 			inputMode = "NONE"
 			break
+		case "sa":
+			if (cmdInput[1].find("/") == null) cmdInput[1] = "./" + cmdInput[1]
+			saveFileAs(cmdInput[1])
+			break
 		case "l":
 			// Load file
 			if (cmdInput[1].find("/") == null) cmdInput[1] = "./" + cmdInput[1]
@@ -34,9 +38,11 @@
 			// Close file
 			delete files[curFile]
 			if (files.keys().len() == 0) {
-				print("No more files open. Closing due to a lack of newfile support.")
-				apQuit = true
+				newFile()
 			}
+			break
+		case "n":
+			newFile()
 			break
 		case "q":
 		case "ex":
@@ -62,7 +68,7 @@
 	// Change which file in files is the active file
 	if (files.keys().find(file) != null) {
 		curFile = file
-		if (file == "new") setWindowTitle("Chestnut TE - Untitled")
+		if (file.slice(0, 3).find("NEW") != null) setWindowTitle("Chestnut TE - Untitled")
 		else setWindowTitle("Chestnut TE - " + file)
 		curPos = files[curFile][3].len()-1
 	}
@@ -102,12 +108,37 @@
 		extension = file.slice(dotIndex)
 	}
 	print("Opened file " + file + ".")
-	files[file] <- [fileWithoutExtension, extension, path.slice(0, path.find(file)), content]
-	changeCurFile(file)
+	files[path] <- [fileWithoutExtension, extension, path.slice(0, path.find(file)), content]
+	changeCurFile(path)
 }
 
 ::saveFile <- function() {
 	// Save contents to file
+	if (files[curFile][2] == null) return
 	local pathToSave = files[curFile][2] + curFile
 	fileWrite(pathToSave, files[curFile][3])
+}
+
+::saveFileAs <- function(path) {
+	// Save contents to file using a path passed in
+	local pathAsArr = split(path, "/")
+	local extension = null
+	local file = pathAsArr.top()
+	local dotIndex = file.find(".")
+	local fileWithoutExtension = file.slice(0, dotIndex)
+	if (dotIndex != null) {
+		extension = file.slice(dotIndex)
+	}
+	files[curFile][0] = fileWithoutExtension
+	files[curFile][1] = extension
+	files[curFile][2] = path
+	files[path] <- delete files[curFile]
+	changeCurFile(path)
+	fileWrite(path, files[curFile][3])
+}
+
+::newFile <- function() {
+	local filesLen = files.len()
+	files["NEW" + filesLen] <- [null, null, null, ""]
+	changeCurFile("NEW" + filesLen)
 }
