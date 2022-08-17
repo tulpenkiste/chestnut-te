@@ -7,3 +7,9 @@ Basic modal text editor made using the [Brux](https://github.com/KelvinShadewing
 - [ ] Prevent input on mode swap
 - [ ] Implement Cursor Pos to make editing files easier
 - [ ] Config file
+### Changelog
+* **0.1**
+  * Basic editor functionality
+  * Several commands built in
+  * Some other stuff probably
+  * Breeze Dark and Breeze Light themes
