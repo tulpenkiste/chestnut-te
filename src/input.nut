@@ -5,7 +5,8 @@
 	switch (inputMode) {
 		case "CMD": {
 			if (justChangedMode) {
-				if (!keyDown(k_s)) {
+				if (!keyDown(k_s) && !keyRelease(k_s)) {
+					keyString()
 					justChangedMode = false
 				}
 				else return
@@ -38,7 +39,8 @@
 		}
 		case "INSERT": {
 			if (justChangedMode) {
-				if (!keyDown(k_t)) {
+				if (!keyDown(k_t) && !keyRelease(k_t)) {
+					keyString()
 					justChangedMode = false
 				}
 				else return
