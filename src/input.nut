@@ -1,7 +1,15 @@
+::justChangedMode <- false
+
 ::handleInput <- function() {
 	// Determine mode
 	switch (inputMode) {
 		case "CMD": {
+			if (justChangedMode) {
+				if (!keyDown(k_s)) {
+					justChangedMode = false
+				}
+				else return
+			}
 			if (keyPress(k_escape)) {
 				inputMode = "NONE"
 				cmdInput = ""
@@ -29,6 +37,12 @@
 			break
 		}
 		case "INSERT": {
+			if (justChangedMode) {
+				if (!keyDown(k_t)) {
+					justChangedMode = false
+				}
+				else return
+			}
 			if (keyPress(k_escape)) {
 				inputMode = "NONE"
 				return
@@ -60,13 +74,16 @@
 				files[curFile][3] += charCheck
 				curPos += 1
 			}
+			if (anyKeyPress() == -1) justChangedMode = false
 			break
 		}
 		case "NONE": {
 			if (keyPress(k_t)) {
+				justChangedMode = true
 				inputMode = "INSERT"
 			}
 			else if (keyPress(k_s)) {
+				justChangedMode = true
 				inputMode = "CMD"
 			}
 			break
