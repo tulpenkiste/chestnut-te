@@ -1,10 +1,22 @@
 Welcome to Chestnut TE. To begin typing, press T to enter INSERT mode. Exit a mode by pressing ESC.
+Notes regarding the lists below:
+	- If a variable is encased in <>, it cannot be omitted or the command will fail.
+	- If a variable is encased in [], it can be omitted.
 Mode List:
-T - Insert
-S - CMD
+	T - Insert
+	S - CMD
 CMD List:
-s - Save
-l - Load
-q/ex - Exit
-rl - Reload text file contents
-swp - Swap to loaded file
+	s - Save
+	sa <path> - Save As
+	l <path> - Load
+	c [path] - Close file. If path is omitted, the current file is used
+	n - New file. Use cmd sa to save
+	q/ex - Exit application. Ensure all files have been saved before using.
+	swp <file> - Swap to loaded file
+	rl - Reload the current text file's contents
+Hotkey List:
+	F1 - Swap themes
+	F3 - Debug
+	F11 - Zoom out
+	F12 - Zoom in
+	Alt on the right side of the keyboard - Quick swp
