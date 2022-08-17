@@ -36,7 +36,8 @@
 			break
 		case "c":
 			// Close file
-			delete files[curFile]
+			if (cmdInput.len() == 2) delete files[cmdInput[1]]
+			else delete files[curFile]
 			if (files.keys().len() == 0) {
 				newFile()
 			}
