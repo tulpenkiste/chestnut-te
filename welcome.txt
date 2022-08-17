@@ -17,6 +17,7 @@ CMD List:
 Hotkey List:
 	F1 - Swap themes
 	F3 - Debug
+	F10 - Toggle Fullscreen
 	F11 - Zoom out
 	F12 - Zoom in
 	Alt on the right side of the keyboard - Quick swp

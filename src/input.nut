@@ -78,6 +78,9 @@
 	if (keyPress(k_f3)) {
 		debug = !debug
 	}
+	if (keyPress(k_f10)) {
+		toggleFullscreen()
+	}
 	if (keyPress(k_f11)) {
 		if (apScale > 1.0) apScale -= 0.25
 	}
