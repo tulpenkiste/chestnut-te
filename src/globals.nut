@@ -126,9 +126,10 @@
 	local extension = null
 	local file = pathAsArr.top()
 	local dotIndex = file.find(".")
-	local fileWithoutExtension = file.slice(0, dotIndex)
+	local fileWithoutExtension = file
 	if (dotIndex != null) {
 		extension = file.slice(dotIndex)
+		fileWithoutExtension = file.slice(0, dotIndex)
 	}
 	files[curFile][0] = fileWithoutExtension
 	files[curFile][1] = extension
