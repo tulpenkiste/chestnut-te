@@ -3,8 +3,8 @@ Notes regarding the lists below:
 	- If a variable is encased in <>, it cannot be omitted or the command will fail.
 	- If a variable is encased in [], it can be omitted.
 Mode List:
-	T - Insert
-	S - CMD
+	i - Insert
+	s - CMD
 CMD List:
 	s - Save
 	sa <path> - Save As
@@ -15,9 +15,6 @@ CMD List:
 	swp <file> - Swap to loaded file
 	rl - Reload the current text file's contents
 Hotkey List:
-	F1 - Swap themes
 	F3 - Debug
 	F10 - Toggle Fullscreen
-	F11 - Zoom out
-	F12 - Zoom in
 	Alt on the right side of the keyboard - Quick swp

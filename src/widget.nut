@@ -5,13 +5,12 @@
 		  case "CMD": {
 			 if (justChangedMode) {
 				    if (!keyDown(k_s) && !keyRelease(k_s)) {
-					   keyString()
 					   justChangedMode = false
 				    }
 				    else return
 			 }
 			 if (keyPress(k_escape)) {
-				    inputMode = "NONE"
+				    swapMode("NORMAL")
 				    cmdInput = ""
 				    return
 			 }
@@ -34,17 +33,29 @@
 			 if (charCheck != "") {
 				    cmdInput += charCheck
 			 }
+			 modeInfo.text = ": " + cmdInput
 			 break
 		  }
 		  case "INSERT": {
 		      if (keyPress(k_escape)) {
-		          inputMode = NONE
+		          swapMode("NORMAL")
 		          cmdInput = ""
 		      }
               else {
-                  base.input()
+                  base.input(inputs)
               }
               break;
+		  }
+		  case "NORMAL": {
+			if (keyPress(k_i)) {
+				justChangedMode = true
+				swapMode("INSERT")
+			}
+			else if (keyPress(k_s)) {
+				justChangedMode = true
+				swapMode("CMD")
+			}
+			break
 		  }
 	   }
 	   if (keyPress(k_f3)) {
@@ -52,6 +63,9 @@
 	   }
 	   if (keyPress(k_f10)) {
 		  toggleFullscreen()
+	   }
+	   if (keyPress(k_ralt)) {
+		  qSwapCurFile()
 	   }
     }
 }

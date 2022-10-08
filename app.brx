@@ -16,16 +16,10 @@ hazelSetTheme()
 ::textbox <- chestnutTextboxWidget("mntxt", 0, 0, windowW(), 230, 0, 0, "", true, true)
 ::modeInfo <- hazelLabelWidget("modetxt", 0, textbox.height + 1, windowW(), 8, 0, 0, "NORMAL", false, true)
 
-hazelSelectedWidget = 0;
-
-print(textbox.width)
-print(textbox.height)
-print(textbox.positionx)
-print(textbox.positiony)
-print(textbox.text)
-
 hazelSetRootWidget(textbox)
 textbox.addChild(modeInfo)
+
+hazelSelectedWidget = textbox.id
 
 if (!fileExists(".nowelcome")) {
 	openFile("./welcome.txt")

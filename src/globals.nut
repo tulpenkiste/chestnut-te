@@ -1,13 +1,14 @@
 // Application variables
 ::chestnutDebug <- false
+::justChangedMode <- false
 
 ::curFile <- ""
 // Files are full_path = [name, extension, path, content]
 ::files <- {
 }
 
-// Mode can be either NONE, INSERT, CMD
-::inputMode <- "NONE"
+// Mode can be either NORMAL, INSERT, CMD
+::inputMode <- "NORMAL"
 ::cmdInput <- ""
 
 ::runCMD <- function() {
@@ -16,7 +17,7 @@
 		case "s":
 			// Save file
 			saveFile()
-			inputMode = "NONE"
+			swapMode("NORMAL")
 			break
 		case "sa":
 			if (cmdInput[1].find("/") == null) cmdInput[1] = "./" + cmdInput[1]
@@ -136,6 +137,12 @@
 	files[path] <- delete files[curFile]
 	changeCurFile(path)
 	fileWrite(path, files[curFile][3])
+}
+
+::swapMode <- function(mode) {
+	inputMode = mode
+	if (inputMode == "CMD") modeInfo.text = ": "
+	else modeInfo.text = inputMode
 }
 
 ::newFile <- function() {
