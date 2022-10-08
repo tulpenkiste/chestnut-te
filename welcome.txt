@@ -1,4 +1,4 @@
-Welcome to Chestnut TE. To begin typing, press T to enter INSERT mode. Exit a mode by pressing ESC.
+Welcome to Chestnut TE. To begin typing, press I to enter INSERT mode. Exit a mode by pressing ESC.
 Notes regarding the lists below:
 	- If a variable is encased in <>, it cannot be omitted or the command will fail.
 	- If a variable is encased in [], it can be omitted.
