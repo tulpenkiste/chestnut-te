@@ -1,12 +1,5 @@
 // Application variables
-::debug <- false
-::apQuit <- false
-::apScale <- 2.0
-::apScreen <- 0
-::screenRectSize <- []
-
-// Cursor position
-::curPos <- 0
+::chestnutDebug <- false
 
 ::curFile <- ""
 // Files are full_path = [name, extension, path, content]
@@ -68,10 +61,11 @@
 ::changeCurFile <- function(file) {
 	// Change which file in files is the active file
 	if (files.keys().find(file) != null) {
+		if (curFile != "") files[curFile][3] = textbox.text
 		curFile = file
+		setTextboxContent()
 		if (file.slice(0, 3).find("NEW") != null) setWindowTitle("Chestnut TE - Untitled")
 		else setWindowTitle("Chestnut TE - " + file)
-		curPos = files[curFile][3].len()-1
 	}
 	else {
 		print("Couldn't find " + file + "!")
@@ -82,9 +76,10 @@
 	// Same thing as above but for hotkey
 	local cIndex = files.keys().find(curFile) + 1
 	if (cIndex > files.keys().len()-1) cIndex = 0
+	files[curFile][3] = textbox.text
 	curFile = files.keys()[cIndex]
+	setTextboxContent()
 	setWindowTitle("Chestnut TE - " + files.keys()[cIndex])
-	curPos = files[curFile][3].len()-1
 }
 
 ::openFile <- function(path) {
@@ -111,6 +106,10 @@
 	print("Opened file " + file + ".")
 	files[path] <- [fileWithoutExtension, extension, path.slice(0, path.find(file)), content]
 	changeCurFile(path)
+}
+
+::setTextboxContent <- function() {
+	textbox.text = files[curFile][3];
 }
 
 ::saveFile <- function() {
@@ -141,6 +140,6 @@
 
 ::newFile <- function() {
 	local filesLen = files.len()
-	files["NEW" + filesLen] <- [null, null, null, ""]
+	files["NEW" + filesLen] <- [null, null, null, "New file"]
 	changeCurFile("NEW" + filesLen)
 }

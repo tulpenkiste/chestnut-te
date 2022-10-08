@@ -2,20 +2,30 @@
 
 print("Using BRUX " + bruxVersion())
 
-// Load this first so we can use mergeTable in some code
-donut("src/utils.nut")
-
-donut("src/assets.nut")
-donut("src/cursor.nut")
-donut("src/globals.nut")
-donut("src/input.nut")
-donut("src/render.nut")
-
 setResolution(800, 600)
 setFPS(60)
 
-screenRectSize = [screenW(), screenH(), apScale]
-apScreen = newTexture(screenRectSize[0], screenRectSize[1])
+// Load this first so we can use mergeTable in some code
+donut("/usr/share/hazel/include.nut")
+
+donut("src/globals.nut")
+donut("src/widget.nut")
+
+hazelSetTheme()
+
+::textbox <- chestnutTextboxWidget("mntxt", 0, 0, windowW(), 230, 0, 0, "", true, true)
+::modeInfo <- hazelLabelWidget("modetxt", 0, textbox.height + 1, windowW(), 8, 0, 0, "NORMAL", false, true)
+
+hazelSelectedWidget = 0;
+
+print(textbox.width)
+print(textbox.height)
+print(textbox.positionx)
+print(textbox.positiony)
+print(textbox.text)
+
+hazelSetRootWidget(textbox)
+textbox.addChild(modeInfo)
 
 if (!fileExists(".nowelcome")) {
 	openFile("./welcome.txt")
@@ -24,15 +34,8 @@ else {
 	newFile()
 }
 
-while (!getQuit() && !apQuit) {
-	apMain()
-	handleInput()
-	setScaling(apScale)
-	if (screenRectSize[0] != windowW() || screenRectSize[1] != windowH() || apScale != screenRectSize[2]) {
-		// Resize resolution to window size
-		setResolution(windowW(), windowH())
-		screenRectSize = [windowW(), windowH(), apScale]
-		apScreen = newTexture(screenRectSize[0] / apScale, screenRectSize[1] / apScale)
-	}
+while (!getQuit() && !hazelQuit) {
+	hazelRenderTexture()
+	hazelInputHandler()
 	update()
 }
