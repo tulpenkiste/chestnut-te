@@ -5,7 +5,6 @@ Basic modal text editor made using the [Brux](https://github.com/KelvinShadewing
 * [Hazel](https://github.com/tulip-sudo/hazel)
 ## To Do
 - [ ] Prevent input on mode swap
-- [ ] Implement Cursor Pos to make editing files easier
 - [ ] Config file
 ## Changelog
 * **0.2.0**
