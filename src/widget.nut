@@ -58,9 +58,6 @@
 			break
 		  }
 	   }
-	   if (keyPress(k_f3)) {
-		  debug = !debug
-	   }
 	   if (keyPress(k_f10)) {
 		  toggleFullscreen()
 	   }

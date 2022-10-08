@@ -1,5 +1,4 @@
 // Application variables
-::chestnutDebug <- false
 ::justChangedMode <- false
 
 ::curFile <- ""

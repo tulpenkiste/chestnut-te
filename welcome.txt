@@ -15,6 +15,5 @@ CMD List:
 	swp <file> - Swap to loaded file
 	rl - Reload the current text file's contents
 Hotkey List:
-	F3 - Debug
 	F10 - Toggle Fullscreen
 	Alt on the right side of the keyboard - Quick swp
