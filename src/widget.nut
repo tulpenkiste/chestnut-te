@@ -1,6 +1,6 @@
 ::chestnutTextboxWidget <- class extends hazelTextboxWidget {
     function input(inputs) {
-        // Determine mode
+       // Determine mode
 	   switch (inputMode) {
 		  case "CMD": {
 			 if (justChangedMode) {
@@ -9,31 +9,26 @@
 				    }
 				    else return
 			 }
-			 if (keyPress(k_escape)) {
-				    swapMode("NORMAL")
-				    cmdInput = ""
-				    return
-			 }
-			 else if (keyPress(k_backspace)) {
-				    if (cmdInput.len() != 0) cmdInput = cmdInput.slice(0, cmdInput.len()-1)
-			 }
-			 if (keyPress(k_enter)) {
-				    cmdInput = strip(cmdInput)
-				    if (cmdInput == "") return
-				    if (cmdInput.find(" ")) {
-					   cmdInput = split(cmdInput, " ")
-				    }
-				    else {
-					   cmdInput = [cmdInput]
-				    }
-				    cmdInput[0] = cmdInput[0].tolower()
-				    runCMD()
-			 }
-			 local charCheck = keyString()
-			 if (charCheck != "") {
-				    cmdInput += charCheck
-			 }
-			 modeInfo.text = ": " + cmdInput
+			 else {
+			 	if (keyPress(k_escape)) {
+				    	swapMode("NORMAL")
+				    	cmdInput.text = ""
+				    	return
+			 	}
+			 	else if (keyPress(k_enter)) {
+				    	local cmd = strip(cmdInput.text)
+				    	if (cmd == "") return
+				    	if (cmd.find(" ")) {
+					   		cmd = split(cmd, " ")
+				    	}
+				    	else {
+					   		cmd = [cmd]
+				    	}
+				    	cmd[0] = cmd[0].tolower()
+				    	runCMD(cmd)
+			 	}
+			 	else base.input(inputs)
+		     }
 			 break
 		  }
 		  case "INSERT": {

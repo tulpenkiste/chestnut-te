@@ -5,7 +5,7 @@ print("Using BRUX " + bruxVersion())
 setResolution(800, 600)
 setFPS(60)
 
-// Load this first so we can use mergeTable in some code
+// Include all of hazel's source files
 donut("/usr/share/hazel/include.nut")
 
 donut("src/globals.nut")
@@ -15,11 +15,14 @@ hazelSetTheme()
 
 ::textbox <- chestnutTextboxWidget("mntxt", 0, 0, windowW(), 230, 0, 0, "", true, true)
 ::modeInfo <- hazelLabelWidget("modetxt", 0, textbox.height + 1, windowW(), 8, 0, 0, "NORMAL", false, true)
+::cmdInput <- chestnutTextboxWidget("mntxt", 16, textbox.height + 1, windowW(), 8, 0, 0, "", true, true)
 
 hazelSetRootWidget(textbox)
 textbox.addChild(modeInfo)
+textbox.addChild(cmdInput)
 
 hazelSelectedWidget = textbox.id
+hazelAllowManualWidgetSelection = false
 
 if (!fileExists(".nowelcome")) {
 	openFile("./welcome.txt")

@@ -8,28 +8,29 @@
 
 // Mode can be either NORMAL, INSERT, CMD
 ::inputMode <- "NORMAL"
-::cmdInput <- ""
 
-::runCMD <- function() {
+::runCMD <- function(cmd) {
 	// Determine command type
-	switch (cmdInput[0]) {
+	switch (cmd[0]) {
 		case "s":
 			// Save file
 			saveFile()
 			swapMode("NORMAL")
 			break
 		case "sa":
-			if (cmdInput[1].find("/") == null) cmdInput[1] = "./" + cmdInput[1]
-			saveFileAs(cmdInput[1])
+			if (cmd.len() != 2) return;
+			if (cmd[1].find("/") == null) cmd[1] = "./" + cmd[1]
+			saveFileAs(cmd[1])
 			break
 		case "l":
 			// Load file
-			if (cmdInput[1].find("/") == null) cmdInput[1] = "./" + cmdInput[1]
-			openFile(cmdInput[1])
+			if (cmd.len() != 2) return;
+			if (cmd[1].find("/") == null) cmd[1] = "./" + cmd[1]
+			openFile(cmd[1])
 			break
 		case "c":
 			// Close file
-			if (cmdInput.len() == 2) delete files[cmdInput[1]]
+			if (cmd.len() == 2) delete files[cmd[1]]
 			else delete files[curFile]
 			if (files.keys().len() == 0) {
 				newFile()
@@ -44,24 +45,26 @@
 			apQuit = true
 			break
 		case "swp":
+			if (cmd.len() != 2) return;
 			// Swap to specific file. Hotkey: Right Alt Key
-			changeCurFile(cmdInput[1])
+			changeCurFile(cmd[1])
 			break
 		case "rl":
 			// Reload file
 			files[curFile][3] = fileRead(files[curFile][2] + curFile)
+			setTextboxContent()
 			break
 		default:
-			print("Unknown command " + cmdInput + ".")
+			print("Unknown command " + cmd[0] + ".")
 			break
 	}
-	cmdInput = ""
+	cmdInput.text = ""
 }
 
-::changeCurFile <- function(file) {
+::changeCurFile <- function(file, skipTextboxTextSet = false) {
 	// Change which file in files is the active file
 	if (files.keys().find(file) != null) {
-		if (curFile != "") files[curFile][3] = textbox.text
+		if (curFile != "" && !skipTextboxTextSet) files[curFile][3] = textbox.text
 		curFile = file
 		setTextboxContent()
 		if (file.slice(0, 3).find("NEW") != null) setWindowTitle("Chestnut TE - Untitled")
@@ -103,7 +106,7 @@
 	if (dotIndex != null) {
 		extension = file.slice(dotIndex)
 	}
-	print("Opened file " + file + ".")
+	print("Opened file " + path + ".")
 	files[path] <- [fileWithoutExtension, extension, path.slice(0, path.find(file)), content]
 	changeCurFile(path)
 }
@@ -115,8 +118,7 @@
 ::saveFile <- function() {
 	// Save contents to file
 	if (files[curFile][2] == null) return
-	local pathToSave = files[curFile][2] + curFile
-	fileWrite(pathToSave, files[curFile][3])
+	fileWrite(curFile, textbox.text)
 }
 
 ::saveFileAs <- function(path) {
@@ -130,22 +132,27 @@
 		extension = file.slice(dotIndex)
 		fileWithoutExtension = file.slice(0, dotIndex)
 	}
-	files[curFile][0] = fileWithoutExtension
-	files[curFile][1] = extension
-	files[curFile][2] = path
-	files[path] <- delete files[curFile]
-	changeCurFile(path)
+	files[path] <- [fileWithoutExtension, extension, path.slice(0, path.find(file)), textbox.text];
+	delete files[curFile];
+	changeCurFile(path, true)
 	fileWrite(path, files[curFile][3])
 }
 
 ::swapMode <- function(mode) {
 	inputMode = mode
-	if (inputMode == "CMD") modeInfo.text = ": "
-	else modeInfo.text = inputMode
+	if (inputMode == "CMD") {
+		modeInfo.text = ": "
+		hazelSelectedWidget = cmdInput.id
+	}
+	else {
+		modeInfo.text = inputMode
+		hazelSelectedWidget = textbox.id
+	}
 }
 
 ::newFile <- function() {
 	local filesLen = files.len()
 	files["NEW" + filesLen] <- [null, null, null, "New file"]
+	print("Opened new file NEW" + filesLen + ".")
 	changeCurFile("NEW" + filesLen)
 }
